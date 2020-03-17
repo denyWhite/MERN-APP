@@ -1,0 +1,15 @@
+{
+  "name": "mern-app",
+  "version": "1.0.0",
+  "description": "Mongo + Express + react + Node ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "mern"
+  },
+  "author": "Denis Belov <den-belov@yandex.ru>",
+  "license": "ISC"
+}
