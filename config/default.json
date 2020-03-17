@@ -1,0 +1,5 @@
+{
+  "port": 5000,
+  "mongoUri": "mongodb+srv://admin:rtyn8DA_mongo@cluster0-at9nn.azure.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "dnywhite mern"
+}

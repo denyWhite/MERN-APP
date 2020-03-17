@@ -1,8 +1,10 @@
 const {Router} = require('express')
-const bcrypt = require('bcriptjs')
+const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const {check, validashionResult} = require('express-validator')
-const User = require('..models/User')
+const User = require('../models/User')
 const router = Router()
+const config = require('config')
 
 // /api/auth
 router.post(
@@ -55,16 +57,24 @@ router.post(
                 })
             }
             const {email, password} = req.body
+
             const user = await user.findOne({email})
             if (!user) {
                 return res.status(400).json({message: 'Такой пользователь не существует'})
             }
+
             const isMatch = await bcrypt.compare(password, user.password)
             if (!isMatch) {
                 return res.status(400).json({message: 'Неверный пароль'})
             }
 
-            res.status(201).json({message: 'Пользователь создан'})
+            const token = jwt.sign(
+                {userId: user.id},
+                config.get('jwtToken'),
+                {expiresIn: '1s'}
+            )
+
+            res.json({token, userId})
 
 
         } catch (e) {
